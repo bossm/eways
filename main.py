@@ -8,15 +8,20 @@ from selenium.webdriver.support.wait import WebDriverWait
 from seleniumwire import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from flask import Flask, request
+import os
 
+absolute_path = os.path.dirname(__file__)
+relative_path = "index.html"
+full_path = os.path.join(absolute_path, relative_path)
+print(full_path)
 
 class BankTest:
 
     def __init__(self):
         self.browser = None
-        self.url = "file:///Users/macbookpro/D/index.html"
+        self.url = f"file://{full_path}"
         self.options = webdriver.ChromeOptions()
-        self.options.add_argument('--headless')
+        # self.options.add_argument('--headless')
 
     def wait_until_element_available(self, element):
         try:
@@ -37,10 +42,11 @@ class BankTest:
         self.browser.find_element(By.XPATH, "//*[@type='submit']").click()
         response_code = self.browser.find_element(*bank_test_code).text.replace('"CardHolderPan"', ',"CardHolderPan"')
         print(response_code)
-        self.browser.quit()
+        # self.browser.quit()
         response_json = json5.loads(response_code)
-        response_json["RefId"] =response_json[""]
-        del response_json[""]
+        if response_json.get(""):
+            response_json["RefId"] = response_json[""]
+            del response_json[""]
         return response_json
 
 
@@ -79,7 +85,7 @@ def login():
 
 
 @app.route('/bank_test', methods=['POST'])
-def set_ode():
+def bank_test():
     data = request.get_json()
     print(data)
     response = BankTest().bank_test_automation(data['ref_id'])
