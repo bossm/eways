@@ -42,7 +42,7 @@ class BankTest:
         self.browser.find_element(By.XPATH, "//*[@type='submit']").click()
         response_code = self.browser.find_element(*bank_test_code).text.replace('"CardHolderPan"', ',"CardHolderPan"')
         print(response_code)
-        # self.browser.quit()
+        self.browser.quit()
         response_json = json5.loads(response_code)
         if response_json.get(""):
             response_json["RefId"] = response_json[""]
