@@ -21,7 +21,7 @@ class BankTest:
         self.browser = None
         self.url = f"file://{full_path}"
         self.options = webdriver.ChromeOptions()
-        # self.options.add_argument('--headless')
+        self.options.add_argument('--headless')
 
     def wait_until_element_available(self, element):
         try:
