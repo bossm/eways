@@ -2,7 +2,7 @@ from time import sleep
 import json5
 from flask_cors import CORS
 from flask_httpauth import HTTPBasicAuth
-from flask_login import login_required, LoginManager
+from flask_login import LoginManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from seleniumwire import webdriver
@@ -36,10 +36,14 @@ class BankTest:
         submit_form = (By.XPATH, "//*[@type='submit']")
         self.browser = webdriver.Chrome(options=self.options)
         self.browser.get(self.url)
+        print(ref_id)
         self.browser.execute_script(f"document.getElementById('RefId').value = '{ref_id}'")
+        # sleep(100)
         self.wait_until_element_available(submit_form).click()
         self.wait_until_element_available(bank_test_load)
+        # sleep(100)
         self.browser.find_element(By.XPATH, "//*[@type='submit']").click()
+        sleep(1)
         response_code = self.browser.find_element(*bank_test_code).text.replace('"CardHolderPan"', ',"CardHolderPan"')
         print(response_code)
         self.browser.quit()
