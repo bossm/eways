@@ -2,7 +2,6 @@ from time import sleep
 import json5
 from flask_cors import CORS
 from flask_httpauth import HTTPBasicAuth
-from flask_login import LoginManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from seleniumwire import webdriver
@@ -60,20 +59,9 @@ app = Flask(__name__)
 app.config["DEBUG"] = 'True'
 app.config["TRACE_LOG"] = 'True'
 auth = HTTPBasicAuth()
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
-login_manager.login_message = "Login Successfully"
 app.secret_key = 'some_secret'
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
-
-@login_manager.user_loader
-def load_user(username, password):
-    if username == 'mshokri' and password == 123:
-        return 1
-    return 2
 
 
 @auth.verify_password
