@@ -84,4 +84,4 @@ def bank_test():
     return response
 
 
-app.run(port=5080, debug=True)
+app.run(host='0.0.0.0', port=5080)
