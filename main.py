@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from flask import Flask, request
 import os
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 absolute_path = os.path.dirname(__file__)
 relative_path = "index.html"
@@ -34,7 +35,7 @@ class BankTest:
         bank_test_load = (By.XPATH, "// h2[contains(text(), 'درگاه تست')]")
         bank_test_code = (By.XPATH, "//code")
         submit_form = (By.XPATH, "//*[@type='submit']")
-        self.browser = webdriver.Chrome(service=Service("/root/base/eways/chromedriver"), options=self.options)
+        self.browser = webdriver.Chrome(options=self.options)
         self.browser.get(self.url)
         print(ref_id)
         self.browser.execute_script(f"document.getElementById('RefId').value = '{ref_id}'")
