@@ -42,7 +42,7 @@ class BankTest:
         self.browser = webdriver.Chrome(executable_path="/root/base/eways/chromedriver", options=self.options)
         # self.browser = webdriver.Chrome(options=self.options)
         self.browser.get(self.url)
-        self.browser.get_screenshot_as_png()
+        self.browser.get_screenshot_as_file("test.png")
         print(ref_id)
         self.browser.execute_script(f"document.getElementById('RefId').value = '{ref_id}'")
         # sleep(100)
