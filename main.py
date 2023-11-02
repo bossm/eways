@@ -2,6 +2,7 @@ from time import sleep
 import json5
 from flask_cors import CORS
 from flask_httpauth import HTTPBasicAuth
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
@@ -20,7 +21,6 @@ class BankTest:
         self.browser = None
         self.url = f"file://{full_path}"
         self.options = webdriver.ChromeOptions()
-        self.options.add_argument(f"webdriver.chrome.driver=/root/base/eways/chromedriver")
         self.options.add_argument('--headless')
 
     def wait_until_element_available(self, element):
@@ -34,7 +34,7 @@ class BankTest:
         bank_test_load = (By.XPATH, "// h2[contains(text(), 'درگاه تست')]")
         bank_test_code = (By.XPATH, "//code")
         submit_form = (By.XPATH, "//*[@type='submit']")
-        self.browser = webdriver.Chrome(options=self.options)
+        self.browser = webdriver.Chrome(service=Service("./chromedriver"), options=self.options)
         self.browser.get(self.url)
         print(ref_id)
         self.browser.execute_script(f"document.getElementById('RefId').value = '{ref_id}'")
