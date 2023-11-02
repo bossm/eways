@@ -39,7 +39,7 @@ class BankTest:
         bank_test_code = (By.XPATH, "//code")
         submit_form = (By.XPATH, "//*[@type='submit']")
         self.browser = webdriver.Chrome(executable_path="/root/base/eways/chromedriver", options=self.options)
-        self.browser = webdriver.Chrome(options=self.options)
+        # self.browser = webdriver.Chrome(options=self.options)
         self.browser.get(self.url)
         print(ref_id)
         self.browser.execute_script(f"document.getElementById('RefId').value = '{ref_id}'")
