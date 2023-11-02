@@ -23,7 +23,7 @@ class BankTest:
         self.browser = None
         self.url = f"file://{full_path}"
         self.options = webdriver.ChromeOptions()
-        self.options.add_argument('--proxy-server=%s' % proxy)
+        # self.options.add_argument('--proxy-server=%s' % proxy)
         self.options.add_argument('--headless')
 
     def wait_until_element_available(self, element):
@@ -37,6 +37,7 @@ class BankTest:
         bank_test_load = (By.XPATH, "// h2[contains(text(), 'درگاه تست')]")
         bank_test_code = (By.XPATH, "//code")
         submit_form = (By.XPATH, "//*[@type='submit']")
+        self.browser = webdriver.Chrome("./chromedriver", options=self.options)
         self.browser = webdriver.Chrome(options=self.options)
         self.browser.get(self.url)
         print(ref_id)
