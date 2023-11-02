@@ -19,9 +19,11 @@ print(full_path)
 class BankTest:
 
     def __init__(self):
+        proxy = "193.168.180.170:8800"  # your proxy
         self.browser = None
         self.url = f"file://{full_path}"
         self.options = webdriver.ChromeOptions()
+        self.options.add_argument('--proxy-server=%s' % proxy)
         self.options.add_argument('--headless')
 
     def wait_until_element_available(self, element):
