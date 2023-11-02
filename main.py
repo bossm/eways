@@ -25,6 +25,7 @@ class BankTest:
         self.options = webdriver.ChromeOptions()
         # self.options.add_argument('--proxy-server=%s' % proxy)
         self.options.add_argument('--headless')
+        self.options.add_argument("--disable-dev-shm-usage")
 
     def wait_until_element_available(self, element):
         try:
