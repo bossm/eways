@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from flask import Flask, request
 import os
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 absolute_path = os.path.dirname(__file__)
@@ -22,10 +23,10 @@ class BankTest:
         proxy = "193.168.180.170:8800"  # your proxy
         self.browser = None
         self.url = f"file://{full_path}"
-        self.options = webdriver.ChromeOptions()
-        # self.options.add_argument('--proxy-server=%s' % proxy)
+        self.options = Options()
         self.options.add_argument('--headless')
-        self.options.add_argument("--disable-dev-shm-usage")
+        self.options.add_argument('--no-sandbox')
+        self.options.add_argument('--disable-dev-shm-usage')
 
     def wait_until_element_available(self, element):
         try:
