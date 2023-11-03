@@ -43,17 +43,17 @@ class BankTest:
         self.browser = webdriver.Chrome(executable_path=driver_path, options=self.options)
         # self.browser = webdriver.Chrome(options=self.options)
         self.browser.get(self.url)
-        self.browser.get_screenshot_as_file("test.png")
+
         print(ref_id)
         self.browser.execute_script(f"document.getElementById('RefId').value = '{ref_id}'")
         # sleep(100)
-        page_source = self.browser.page_source
+        # page_source = self.browser.page_source
         # Print the page source
-        print(page_source)
+        # print(page_source)
         self.wait_until_element_available(submit_form).click()
         self.wait_until_element_available(bank_test_load)
         # sleep(100)
-
+        # self.browser.get_screenshot_as_file("test.png")
         self.browser.find_element(By.XPATH, "//*[@type='submit']").click()
         sleep(1)
         response_code = self.browser.find_element(*bank_test_code).text.replace('"CardHolderPan"', ',"CardHolderPan"')
